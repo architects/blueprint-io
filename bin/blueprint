@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+
+require "rubygems"
+require "pathname"
+
+$:.unshift Pathname(File.dirname(__FILE__)).join("..","lib")
+
+# support for the traveling ruby env
+ENV['BRIEF_PWD'] = ENV['DATAPIMP_PWD'] = ENV['BLUEPRINT_PWD'] if ENV['BLUEPRINT_PWD']
+
+require 'blueprint/io'
+require 'brief'
+require 'brief/dsl'
+require 'datapimp'
+require 'datapimp/cli'
+require "pry"
+require 'colored'
+
+args = ARGV.to_a.dup
+
+if args.shift.to_s.strip.downcase == "run"
+  require(args.first) if args.first
+
+  if args.empty?
+    code = STDIN.read
+
+    if code.length > 0
+      eval(code)
+    end
+  end
+else
+  require "commander/import"
+
+  program :name, 'archi'
+  program :version, Blueprint::Io::VERSION || "1.0.1"
+  program :description, 'architects toolkit for writing blueprints'
+    
+  $terminal.wrap_at = 120 if $terminal
+
+  Blueprint::Io.load_commands()
+end
