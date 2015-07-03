@@ -1,5 +1,7 @@
+require 'git-version-bump'
+
 module Blueprint
   module Io
-    VERSION = "0.3.2"
+    VERSION = GVB.version
   end
 end
