@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'datapimp', '>= 1.2.1'
-  spec.add_dependency 'brief', '>= 1.17.7'
+  spec.add_dependency 'brief', '>= 1.17.11'
   spec.add_dependency 'skypager', '>= 2.0.0'
 
   spec.add_development_dependency 'git-version-bump'
